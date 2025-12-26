@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import pickle
 import plotly.graph_objects as go
+import numpy as np
 
 
 def get_clean_data():
@@ -103,16 +104,7 @@ def get_radar_chart(input_data):
             fill='toself',
             name='Mean Value'
     ))
-    fig.add_trace(go.Scatterpolar(
-            r=[
-            input_data['radius_se'], input_data['texture_se'], input_data['perimeter_se'], input_data['area_se'],
-            input_data['smoothness_se'], input_data['compactness_se'], input_data['concavity_se'],
-            input_data['concave points_se'], input_data['symmetry_se'],input_data['fractal_dimension_se']
-            ],
-            theta=categories,
-            fill='toself',
-            name='Standard Error'
-    ))
+    
     fig.add_trace(go.Scatterpolar(
             r=[
             input_data['radius_worst'], input_data['texture_worst'], input_data['perimeter_worst'],
@@ -123,6 +115,17 @@ def get_radar_chart(input_data):
             theta=categories,
             fill='toself',
             name='Worst Value'
+    ))
+    
+    fig.add_trace(go.Scatterpolar(
+            r=[
+            input_data['radius_se'], input_data['texture_se'], input_data['perimeter_se'], input_data['area_se'],
+            input_data['smoothness_se'], input_data['compactness_se'], input_data['concavity_se'],
+            input_data['concave points_se'], input_data['symmetry_se'],input_data['fractal_dimension_se']
+            ],
+            theta=categories,
+            fill='toself',
+            name='Standard Error'
     ))
 
     fig.update_layout(
@@ -135,7 +138,34 @@ def get_radar_chart(input_data):
     )   
     
     return fig
+
+def add_predictions(input_data):
+    with open('Model/model.pkl', 'rb') as f:
+        model = pickle.load(f)
+        
+    with open('Model/scaler.pkl', 'rb') as f:
+        scaler = pickle.load(f)
     
+        input_array = np.array([list(input_data.values())]).reshape(1, -1)
+        
+        input_array_scale = scaler.transform(input_array)
+        
+        prediction = model.predict(input_array_scale)
+        
+        st.subheader("Cell Cluster Prediction ")
+        st.write("The model predicts the following diagnosis:")
+        
+        if prediction[0] == 0:
+            st.write("Benign ")
+        else:
+            st.write("Malicious") 
+            
+        st.write("Probability of being Benign: ", model.predict_proba(input_array_scale)[0][0])
+        st.write("Probability of being Malicious: ", model.predict_proba(input_array_scale)[0][1])
+        
+        st.write("This app can assist medical professionals in making a diagnosis, but should not be used as a substitute for a professional diagnosis.")
+    
+
 def main():
     st.set_page_config(
         page_title="Breast Cancer Prediction App", 
@@ -157,7 +187,7 @@ def main():
         st.plotly_chart(radar_chart)
             
     with col2:
-        st.write("this is column 2")
+        add_predictions(input_data)
 
 
 if __name__ == "__main__":
