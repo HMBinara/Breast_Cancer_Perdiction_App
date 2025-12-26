@@ -15,7 +15,6 @@ def get_clean_data():
     
     return data
 
-
 def add_sidebar():
     st.sidebar.header("Cell Nuclei Measurements ")
     
@@ -66,7 +65,25 @@ def add_sidebar():
         
     return input_dit
     
-def get_radar_chart(): 
+def get_scaled_value(input_dict):
+    
+    data = get_clean_data()
+    
+    X = data.drop('diagnosis', axis=1)
+    
+    scaled_dict = {}
+    
+    for key, value in input_dict.items():
+        max_val = X[key].max()
+        min_val = X[key].min()
+        scale_value = (value - min_val)/(max_val - min_val)
+        scaled_dict[key] = scale_value 
+    
+    return scaled_dict
+    
+def get_radar_chart(input_data): 
+    
+    input_data = get_scaled_value(input_data)
     
     categories = ['Radius', 'Texture', 'Perimeter', 'Area', 
                 'Smoothness', 'Compactness', 
@@ -136,7 +153,8 @@ def main():
     col1, col2  =st.columns([4,1])
     
     with col1:
-        get_radar_chart(input_data)
+        radar_chart = get_radar_chart(input_data)
+        st.plotly_chart(radar_chart)
             
     with col2:
         st.write("this is column 2")
