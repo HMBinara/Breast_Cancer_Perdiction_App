@@ -1,0 +1,34 @@
+.stVerticalBlock.st-emotion-cache-wfksaw.ek2vi383 {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: #7E99AB;
+
+}
+
+.diagnosis {
+    color: white;
+    padding: 0.2em 0.5em;
+    border-radius: 0.3em;
+}
+
+.diagnosis.benign {
+    background-color: #4CAF50;
+    /* Green */
+}
+
+.diagnosis.malignant {
+    background-color: #F44336;
+    /* Red */
+}
+
+/* Adjust the sidebar width to 25% of the screen */
+[data-testid="stSidebar"] {
+    width: 20% !important;
+    min-width: 20% !important;
+    max-width: 20% !important;
+}
+
+/* Ensure the content inside the sidebar expands to fill the 100% of the new width */
+[data-testid="stSidebar"]>div:first-child {
+    width: 100% !important;
+}
