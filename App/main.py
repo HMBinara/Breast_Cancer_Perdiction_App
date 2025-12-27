@@ -156,12 +156,12 @@ def add_predictions(input_data):
         st.write("The model predicts the following diagnosis:")
         
         if prediction[0] == 0:
-            st.write("Benign ")
+            st.write("<span class='diagnosis benign'> Benign </span>", unsafe_allow_html=True)
         else:
-            st.write("Malicious") 
+            st.write("<span class='diagnosis malignant'> Malignant </span>", unsafe_allow_html=True) 
             
         st.write("Probability of being Benign: ", model.predict_proba(input_array_scale)[0][0])
-        st.write("Probability of being Malicious: ", model.predict_proba(input_array_scale)[0][1])
+        st.write("Probability of being Malignant: ", model.predict_proba(input_array_scale)[0][1])
         
         st.write("This app can assist medical professionals in making a diagnosis, but should not be used as a substitute for a professional diagnosis.")
     
@@ -175,6 +175,10 @@ def main():
     )
     
     input_data = add_sidebar()
+    
+    with open("Assets/style.css") as f:
+        st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
+        
     
     with st.container():
         st.title("Breast Cancer Prediction App")
