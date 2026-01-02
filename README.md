@@ -1,5 +1,3 @@
-Markdown
-
 # 🎀 Breast Cancer Prediction App
 
 <div align="center">
@@ -7,25 +5,28 @@ Markdown
   <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white" />
   <img src="https://img.shields.io/badge/Scikit_Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" />
   <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" />
+  <img src="https://img.shields.io/badge/Open%20Source-Yes-brightgreen?style=for-the-badge" />
 </div>
 
 ---
 
 ### 🔍 Project Overview
-මෙම යෙදුම (App) මගින් රෝගියෙකුගේ සෛල සාම්පලවල ඇති ලක්ෂණ (features) පරීක්ෂා කර, එම පිළිකාව **Malignant** (අන්තරාදායක) ද නැතහොත් **Benign** (අන්තරාදායක නොවන) ද යන්න නිවැරදිව අනාවැකි පල කරයි.
+This is a **Machine Learning** powered web application that predicts whether a breast tumor is **Malignant** (cancerous) or **Benign** (non-cancerous) based on cell nucleus characteristics. 
 
-මෙය **Machine Learning (Logistic Regression)** තාක්ෂණය සහ **Streamlit** framework එක භාවිතයෙන් නිර්මාණය කර ඇත.
+Built with **Python**, **Logistic Regression**, and **Streamlit**, this tool aims to provide a fast and accessible way to visualize diagnostic data and get instant model predictions.
 
-### 📊 Dataset Information
-මම මේ සඳහා **UCI Machine Learning Repository** හි ඇති **Breast Cancer Wisconsin (Diagnostic) Dataset** එක භාවිතා කළා.
-* **Instances:** 569
-* **Features:** 30 (Mean Radius, Texture, Perimeter, Area, etc.)
-* **Accuracy:** ~95% - 98% (Model performance)
+### 📊 Dataset Details
+I used the **Breast Cancer Wisconsin (Diagnostic) Dataset** from the UCI Machine Learning Repository (Kaggle).
+- **Instances:** 569
+- **Features:** 30 (Radius, Texture, Perimeter, Area, etc.)
+- **Model:** Logistic Regression
+- **Performance:** Achieved high accuracy in classifying diagnostic results.
 
 ### 🚀 Key Features
-- **User-friendly Interface:** ඕනෑම කෙනෙකුට පහසුවෙන් දත්ත ඇතුළත් කළ හැකි UI එකක්.
-- **Real-time Prediction:** දත්ත ඇතුළත් කළ සැනින් ප්‍රතිඵලය ලබා දීම.
-- **Visual Analytics:** සෛලවල ලක්ෂණ එකිනෙක සැසඳිය හැකි අයුරින් සකසා ඇත.
+- **Interactive UI:** Simple sliders or input fields for data entry.
+- **Instant Prediction:** Get diagnostic results in real-time.
+- **Clean Dashboard:** Powered by Streamlit for a professional look and feel.
+- **Educational:** Useful for students and researchers to understand ML classification.
 
 ### 🛠️ How to Run Locally
 
@@ -33,22 +34,22 @@ Markdown
    ```bash
    git clone [https://github.com/HMBinara/Breast_Cancer_Perdiction_App.git](https://github.com/HMBinara/Breast_Cancer_Perdiction_App.git)
    cd Breast_Cancer_Perdiction_App
-Install Dependencies:
+Install Required Libraries:
 
 Bash
 
 pip install -r requirements.txt
-Run the App:
+Launch the Application:
 
 Bash
 
 streamlit run app.py
 📁 File Structure
-app.py: ප්‍රධාන Streamlit කේතය (Frontend & logic).
+app.py: The main script for the Streamlit web interface and logic.
 
-model.py / pickle file: පුහුණු කරන ලද ML මොඩලය.
+requirements.txt: List of Python libraries needed to run the app.
 
-data.csv: පාවිච්චි කරන ලද දත්ත කට්ටලය.
+data.csv: The dataset used for training and testing.
 
 👨‍💻 Developed By
 Binara Nethranjana Adhikari
